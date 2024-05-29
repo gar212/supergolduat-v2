@@ -20,6 +20,9 @@
         .container {
             display: none;
         }
+        .visible {
+            display: block;
+        }
         .app-logo {
             max-width: 100%;
             height: auto;
@@ -44,14 +47,14 @@
         if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
             window.location.href = 'https://www.figma.com/proto/1oG70zYe9VeTDEVIsT4z7E/SuperGold-%2F-KiwiPoints?page-id=0%3A1&node-id=1-4&viewport=1058%2C343%2C0.5&t=fppdCmwA1QtiVq5N-1&scaling=scale-down&starting-point-node-id=1%3A4';
         } else {
-            document.querySelector('.container').style.display = 'block';
+            document.querySelector('.container').classList.add('visible');
         }
 
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            document.querySelector('.container').style.display = 'block';
+            document.querySelector('.container').classList.add('visible');
             const button = document.createElement('button');
             button.innerHTML = 'Add to Home Screen';
             button.style.padding = '10px 20px';
