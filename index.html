@@ -32,10 +32,11 @@
 </head>
 <body>
     <div class="container">
-        <p>Add this app to your home screen for easy access!</p>
+        <p>Install this app for easy access!</p>
         <img src="logo.png" alt="App Logo" class="app-logo">
     </div>
     <script>
+        // Register the service worker
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js').then(function(registration) {
                 console.log('Service Worker registered with scope:', registration.scope);
@@ -44,35 +45,29 @@
             });
         }
 
-        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-            window.location.href = 'https://www.figma.com/proto/1oG70zYe9VeTDEVIsT4z7E/SuperGold-%2F-KiwiPoints?page-id=0%3A1&node-id=1-4&viewport=1058%2C343%2C0.5&t=fppdCmwA1QtiVq5N-1&scaling=scale-down&starting-point-node-id=1%3A4';
-        } else {
-            document.querySelector('.container').classList.add('visible');
-        }
-
-        let deferredPrompt;
+        // Show install prompt
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
-            deferredPrompt = e;
-            document.querySelector('.container').classList.add('visible');
             const button = document.createElement('button');
-            button.innerHTML = 'Add to Home Screen';
+            button.innerHTML = 'Install';
             button.style.padding = '10px 20px';
             button.style.fontSize = '16px';
-            document.body.appendChild(button);
-
             button.addEventListener('click', (e) => {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
-                    } else {
-                        console.log('User dismissed the install prompt');
-                    }
-                    deferredPrompt = null;
-                    button.style.display = 'none';
-                });
+                e.preventDefault();
+                e.stopPropagation();
+                e.target.disabled = true;
+                e.prompt();
             });
+            document.body.appendChild(button);
+            document.querySelector('.container').classList.add('visible');
+        });
+
+        setTimeout(() => {
+            document.querySelector('.container').classList.add('visible');
+        }, 5000); 
+
+        window.addEventListener('appinstalled', () => {
+            document.querySelector('.container').style.display = 'none';
         });
     </script>
 </body>
