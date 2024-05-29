@@ -1,7 +1,7 @@
 {
-    "name": "Figma Prototype",
-    "short_name": "Prototype",
-    "description": "Open Figma Prototype",
+    "name": "SuperGold",
+    "short_name": "SuperGold",
+    "description": "Open SuperGold Prototype",
     "start_url": "https://www.figma.com/proto/1oG70zYe9VeTDEVIsT4z7E/SuperGold-%2F-KiwiPoints?page-id=0%3A1&node-id=1-4&viewport=1058%2C343%2C0.5&t=fppdCmwA1QtiVq5N-1&scaling=scale-down&starting-point-node-id=1%3A4",
     "display": "standalone",
     "background_color": "#f5f5f5",
